@@ -1,8 +1,40 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const HeroSection: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [visibleWords, setVisibleWords] = useState(0);
+  const [textVisible, setTextVisible] = useState(true);
+  const titleWords = 'Future is FUT'.split(' ');
+  const [delays, setDelays] = useState<number[]>([]);
+
+  // Yazı animasyonu için gecikmeler oluştur
+  useEffect(() => {
+    setDelays(titleWords.map(() => Math.random() * 0.07));
+    
+    // Kelimeleri sırayla göster
+    const wordInterval = setInterval(() => {
+      setVisibleWords(prev => {
+        if (prev < titleWords.length) {
+          return prev + 1;
+        }
+        clearInterval(wordInterval);
+        return prev;
+      });
+    }, 600);
+    
+    // Yazı göster/gizle döngüsü
+    const visibilityInterval = setInterval(() => {
+      if (visibleWords === titleWords.length) {
+        setTextVisible(prev => !prev);
+      }
+    }, 5000); // 5 saniyede bir değişim
+    
+    return () => {
+      clearInterval(wordInterval);
+      clearInterval(visibilityInterval);
+    };
+  }, [titleWords.length, visibleWords]);
 
   const togglePlayPause = () => {
     if (videoRef.current) {
@@ -56,6 +88,31 @@ const HeroSection: React.FC = () => {
                 <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
               )}
             </svg>
+          </div>
+        </div>
+      </div>
+      
+      {/* Efektli Başlık */}
+      <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
+        <div className={`text-center transition-all duration-2000 ease-in-out ${textVisible ? 'opacity-100 transform-none' : 'opacity-0 translate-y-8'}`}>
+          <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold">
+            <div className="flex flex-wrap justify-center space-x-2 lg:space-x-6 overflow-hidden text-white uppercase">
+              {titleWords.map((word, index) => (
+                <div
+                  key={index}
+                  className="glitch-text"
+                  data-text={word}
+                  style={{ 
+                    animationDelay: `${index * 0.13 + (delays[index] || 0)}s`,
+                    opacity: index < visibleWords ? 1 : 0,
+                    transform: index < visibleWords ? 'translateY(0)' : 'translateY(20px)',
+                    transition: 'opacity 0.5s ease, transform 0.5s ease'
+                  }}
+                >
+                  {word}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

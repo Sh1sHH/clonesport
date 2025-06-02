@@ -16,7 +16,7 @@ const NewsSection: React.FC = () => {
           {news.map((article) => (
             <div 
               key={article.id}
-              className="bg-gray-900/50 backdrop-blur-sm rounded-lg overflow-hidden flex flex-col h-full border border-gray-800/50 hover:border-red-500/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-red-900/10 hover:translate-y-[-5px]"
+              className="bg-red-900/50 backdrop-blur-sm rounded-lg overflow-hidden flex flex-col h-full border border-gray-800/50 hover:border-red-500/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-red-900/10 hover:translate-y-[-5px]"
             >
               <div className="relative h-52 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
