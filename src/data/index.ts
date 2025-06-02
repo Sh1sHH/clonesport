@@ -240,6 +240,12 @@ export const sponsors: Sponsor[] = [
     logo: '/vodafone_logo.webp',
     tier: 'gold',
   },
+  {
+    id: 'sponsor5',
+    name: 'Vodafone',
+    logo: '/migros_logo.webp',
+    tier: 'platinum',
+  },
 ];
 
 export const footerLinks: FooterSection[] = [
