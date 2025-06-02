@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavItem } from '../types';
-import { Menu, X, ChevronDown, Search, User, ShoppingCart } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
 const navItems: NavItem[] = [
@@ -24,32 +24,25 @@ const Navbar: React.FC = () => {
             <Logo />
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-gray-300 hover:text-red-500 px-2 py-1 text-sm font-medium transition-colors duration-200"
-              >
-                {item.label}
-              </a>
-            ))}
+          {/* Desktop Navigation - Menü Öğeleri Ortalanmış */}
+          <div className="hidden md:flex justify-center flex-1">
+            <div className="flex items-center space-x-6">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-gray-300 hover:text-red-500 px-2 py-1 text-sm font-medium transition-colors duration-200"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Right Actions */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="text-gray-300 hover:text-red-500 transition-colors duration-200">
-              <Search size={20} />
-            </button>
-            <button className="text-gray-300 hover:text-red-500 transition-colors duration-200">
-              <User size={20} />
-            </button>
-            <button className="text-gray-300 hover:text-red-500 transition-colors duration-200">
-              <ShoppingCart size={20} />
-            </button>
+          {/* Shop Button - Sağda */}
+          <div className="hidden md:flex items-center">
             <button className="bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-md text-sm transition-colors duration-200">
-              Join Now
+              Shop
             </button>
           </div>
 
@@ -78,20 +71,9 @@ const Navbar: React.FC = () => {
                 {item.label}
               </a>
             ))}
-            <div className="pt-4 flex justify-between px-3">
-              <button className="text-gray-300 hover:text-red-500 transition-colors duration-200">
-                <Search size={20} />
-              </button>
-              <button className="text-gray-300 hover:text-red-500 transition-colors duration-200">
-                <User size={20} />
-              </button>
-              <button className="text-gray-300 hover:text-red-500 transition-colors duration-200">
-                <ShoppingCart size={20} />
-              </button>
-            </div>
             <div className="px-3 pt-2">
               <button className="w-full bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-md text-sm transition-colors duration-200">
-                Join Now
+                Shop
               </button>
             </div>
           </div>
